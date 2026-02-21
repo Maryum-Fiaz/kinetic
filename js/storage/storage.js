@@ -1,0 +1,11 @@
+// using local storage
+
+export function saveInStorage(key, value) {
+    localStorage.setItem(key, JSON.stringify(value))
+}
+
+export function getFromStorage(key) {
+    return JSON.parse(localStorage.getItem(key)) || [];
+}
+
+// || [] --> let's check if it crash !

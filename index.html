@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MOVE | Fitness Tracker</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <header>
+        <h1>MOVE <span>.</span></h1>
+        <button id="openModalBtn" class="btn-primary">+ Add Workout</button>
+    </header>
+
+    <main id="dashboard">
+        <div id="emptyState">
+            <p>No workouts logged yet. Time to move! 💪</p>
+        </div>
+    </main>
+
+    <dialog id="workoutModal">
+        <form id="workoutForm" method="dialog">
+            <h2>New Activity</h2>
+            
+            <label for="type">Activity Type</label>
+            <select id="type" required>
+                <option value="Running">Running 👟</option>
+                <option value="Cycling">Cycling 🚲</option>
+                <option value="Gym">Gym 💪</option>
+            </select>
+
+            <label for="duration">Duration (mins)</label>
+            <input type="number" id="duration" placeholder="30" required>
+
+            <label for="distance">Distance (km) <small>(If applicable)</small></label>
+            <input type="number" id="distance" placeholder="5">
+
+            <div class="modal-actions">
+                <button type="button" id="closeModalBtn" class="btn-secondary">Cancel</button>
+                <button type="submit" class="btn-primary">Save Activity</button>
+            </div>
+        </form>
+    </dialog>
+
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>
