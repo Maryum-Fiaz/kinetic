@@ -9,11 +9,17 @@ class Activity {
         this.isNotCompleted = false;
     }
 
+    getSummary() {
+        const distance = this.dist ? this.dist : '';
+        return `${this.type} - ${this.date} - (${this.duration}) mins ${distance} `
+    }
+
 }
 
 class Running extends Activity {
     constructor(dist, duration){
         super(duration)
+        this.getSummary();
         this.dist = dist;
         this.type = 'Running'
     }
@@ -22,6 +28,7 @@ class Running extends Activity {
 class Cycling extends Activity {
     constructor(dist, duration){
         super(duration)
+        this.getSummary();
         this.dist = dist;
         this.type = 'Cycling'
     }
@@ -30,6 +37,7 @@ class Cycling extends Activity {
 class Gym extends Activity {
     constructor(duration){
         super(duration)
+        this.getSummary();
         this.type = 'Gym';
         this.dist = 0;
     }

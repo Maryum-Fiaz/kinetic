@@ -1,5 +1,6 @@
 import { Activity, Running, Cycling, Gym } from "./activity.js";
 import { saveInStorage, getFromStorage } from "./storage/storage.js";
+import { rehydration } from "./utils.js";
 
 // **************** SELECT ITEMS ****************
 const addWorkout = document.getElementById("openModalBtn");
@@ -15,6 +16,7 @@ const dashboard = document.getElementById("dashboard");
 // **************** VARIABLES ***************
 const ulList = document.createElement("ul");
 let arr = getFromStorage("workoutList");
+arr = rehydration(arr)
 console.log("get data from storage: ", arr);
 
 // **************** ON FIRST LOAD **************
@@ -150,7 +152,7 @@ function renderDashboard(workArray) {
 
       return `
         <li class='workout-List ${finishedToggle}' data-id = '${obj.id}'>
-        ${obj.type} - ${obj.duration} mins <span class = 'remove'>❌</span>
+        ${obj.getSummary()} <span class = 'remove'>❌</span>
         <button class='finished-btn' ${finishedDisable}>Mark As Finished</button>
         <button class='notCompleted-btn ${notCompletedToggle}' ${notCompletedDisable}>Not Completed</button>
         </li>

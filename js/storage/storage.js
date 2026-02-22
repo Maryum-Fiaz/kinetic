@@ -7,5 +7,3 @@ export function saveInStorage(key, value) {
 export function getFromStorage(key) {
     return JSON.parse(localStorage.getItem(key)) || [];
 }
-
-// || [] --> let's check if it crash !
