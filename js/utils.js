@@ -8,11 +8,11 @@ import { Running, Cycling, Gym } from "./activity.js";
 export function rehydration(workArray) {
 
    const arrayOfObj = workArray.map(obj => {
-        if( obj.type === 'Running') return new Running(obj.duration, obj.dist, obj.id);
+        if( obj.type === 'Running') return new Running(obj.dist, obj.duration, obj.id);
 
-        if(obj.type === 'Cycling') return new Cycling(obj.duration, obj.dist, obj.id);
+        if(obj.type === 'Cycling') return new Cycling(obj.dist,obj.duration, obj.id);
 
-        if(obj.type === 'Gym') return new Gym(obj.duration, obj.dist, obj.id);
+        if(obj.type === 'Gym') return new Gym(obj.duration, obj.id);
     })
 
     return arrayOfObj;
