@@ -1,12 +1,12 @@
 // class
 
 class Activity {
-    constructor (duration) {
-        this.id = crypto.randomUUID()
+    constructor (duration, id, date, isFinished, isNotCompleted) {
+        this.id = id || crypto.randomUUID()
         this.duration = duration;
-        this.date = new Date().toLocaleDateString();
-        this.isFinished = false;
-        this.isNotCompleted = false;
+        this.date = date || new Date().toLocaleDateString();
+        this.isFinished = isFinished || false;
+        this.isNotCompleted = isNotCompleted || false;
     }
 
     getSummary() {
@@ -17,8 +17,8 @@ class Activity {
 }
 
 class Running extends Activity {
-    constructor(dist, duration){
-        super(duration)
+    constructor(dist, duration, id, date, isFinished, isNotCompleted){
+        super(duration, id, date, isFinished, isNotCompleted)
         this.getSummary();
         this.dist = dist;
         this.type = 'Running'
@@ -26,8 +26,8 @@ class Running extends Activity {
 }
 
 class Cycling extends Activity {
-    constructor(dist, duration){
-        super(duration)
+    constructor(dist, duration, id, date, isFinished, isNotCompleted){
+        super(duration, id, date, isFinished, isNotCompleted)
         this.getSummary();
         this.dist = dist;
         this.type = 'Cycling'
@@ -35,12 +35,37 @@ class Cycling extends Activity {
 }
 
 class Gym extends Activity {
-    constructor(duration){
-        super(duration)
+    constructor(duration, id, date, isFinished, isNotCompleted){
+        super(duration, id, date, isFinished, isNotCompleted)
         this.getSummary();
         this.type = 'Gym';
         this.dist = 0;
     }
 }
 
-export { Activity, Running, Cycling, Gym};
+class Swimming extends Activity {
+    constructor(duration, id, date, isFinished, isNotCompleted){
+        super(duration, id, date, isFinished, isNotCompleted)
+        this.getSummary();
+        this.type = 'Swimming';
+        this.dist = 0;
+    }
+}
+
+class JumpingRope extends Activity {
+    constructor(duration, id, date, isFinished, isNotCompleted) {
+        super(duration, id, date, isFinished, isNotCompleted)
+        this.getSummary();
+        this.type = 'Jumping-rope';
+    }
+}
+
+class CustomActivity extends Activity {
+    constructor(duration, type, id, date, isFinished, isNotCompleted) {
+        super(duration, id, date, isFinished, isNotCompleted)
+        this.getSummary();
+        this.type = type;
+    }
+}
+
+export { Activity, Running, Cycling, Gym, Swimming, JumpingRope, CustomActivity};

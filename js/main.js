@@ -1,4 +1,4 @@
-import { Activity, Running, Cycling, Gym } from "./activity.js";
+import { Activity, Running, Cycling, Gym, Swimming, JumpingRope, CustomActivity } from "./activity.js";
 import { saveInStorage, getFromStorage } from "./storage/storage.js";
 import { rehydration } from "./utils.js";
 
@@ -33,20 +33,26 @@ closeDialogBtn.addEventListener("click", () => {
 });
 
 dropdown.addEventListener("change", (e) => {
-  if (e.target.value === "Gym") {
+  const value = e.target.value;
+  if (value === "Gym") {
     distance.value = 0;
     distance.disabled = true;
   } else {
     distance.value = "";
     distance.disabled = false;
   }
+
+    const hiddenActivity = document.querySelector('.hidden-Activity');
+    hiddenActivity.classList.toggle('show', value === 'Others')
 });
 
+
+const customActivityType = document.getElementById('activity-type');
 // 1.
 workoutForm.addEventListener("submit", (e) => {
   e.preventDefault();
 
-  const type = dropdown.value;
+  const type = dropdown.value === 'Others'? customActivityType.value : dropdown.value;
   const dur = Number(duration.value);
   const dist = Number(distance.value);
 
@@ -54,7 +60,7 @@ workoutForm.addEventListener("submit", (e) => {
 
   let activity;
 
-  switch (type) {
+  switch (dropdown.value) {
     case "Running":
       activity = new Running(dist, dur);
       break;
@@ -64,6 +70,15 @@ workoutForm.addEventListener("submit", (e) => {
     case "Gym":
       activity = new Gym(dur);
       break;
+    case "Swimming":
+      activity = new Swimming(dur);
+      break;
+    case "Jumping-rope":
+      activity = new JumpingRope(dur);
+      break;
+    case "Others":
+      activity = new CustomActivity(dur, type);
+    break;
   }
 
   workoutArray(activity); // data entered --> array
