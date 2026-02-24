@@ -87,10 +87,27 @@ h1 span {
     color: var(--text-dim);
 }
 
+/* --- Empty State Image Styling --- */
+#emptyState img {
+    max-width: 200px;
+    width: 100%;
+    margin-top: 2rem;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    opacity: 0.8;
+    animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
 #ulList {
     list-style: none;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 1.5rem;
 }
 
@@ -103,6 +120,27 @@ li {
     border-radius: 20px;
     position: relative;
     transition: border-color 0.3s;
+    position: relative;
+}
+
+.workout-day{
+    position: absolute;
+    top: -10px;
+    left: 20px;
+    background: var(--accent);
+    color: #000;
+    padding: 4px 15px;
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(212, 255, 0, 0.3);
+}
+
+.workout-content {
+    margin-top: 0.5rem;
+    font-weight: 500;
+    line-height: 1.4;
 }
 
 li:hover {
@@ -209,4 +247,29 @@ button:disabled {
     cursor: not-allowed;
     filter: grayscale(1);
     pointer-events: none; /* This ensures the click event never even fires */
+}
+
+
+
+/* --- Responsive Adjustments --- */
+
+@media (max-width: 600px) {
+    body {
+        padding: 1rem; /* Less padding on the edges of the screen */
+    }
+
+    header {
+        flex-direction: column; /* Stack logo and button on top of each other */
+        gap: 1.5rem;
+        text-align: center;
+    }
+
+    dialog {
+        padding: 1.5rem;
+        width: 95%; /* Take up more space on mobile */
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
 }

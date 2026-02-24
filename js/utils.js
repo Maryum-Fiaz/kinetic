@@ -11,18 +11,18 @@ export function rehydration(workArray) {
 
         if(!obj) return null;
 
-        if( obj.type === 'Running') return new Running(obj.dist, obj.duration, obj.id, obj.date, obj.isFinished, obj.isNotCompleted);
+        if( obj.type === 'Running') return new Running(obj.duration, obj.day, obj.id, obj.date, obj.isFinished, obj.isNotCompleted);
 
-        if(obj.type === 'Cycling') return new Cycling(obj.dist,obj.duration, obj.id, obj.date, obj.isFinished, obj.isNotCompleted);
+        if(obj.type === 'Cycling') return new Cycling(obj.duration, obj.day, obj.id, obj.date, obj.isFinished, obj.isNotCompleted);
 
-        if(obj.type === 'Gym') return new Gym(obj.duration, obj.id, obj.date, obj.isFinished, obj.isNotCompleted);
+        if(obj.type === 'Gym') return new Gym(obj.duration, obj.day, obj.id, obj.date, obj.isFinished, obj.isNotCompleted);
 
-        if(obj.type === 'Swimming') return new Swimming(obj.duration, obj.id, obj.date, obj.isFinished, obj.isNotCompleted);
+        if(obj.type === 'Swimming') return new Swimming(obj.duration, obj.day, obj.id, obj.date, obj.isFinished, obj.isNotCompleted);
 
-        if(obj.type === 'Jumping-rope') return new JumpingRope(obj.duration, obj.id, obj.date, obj.isFinished, obj.isNotCompleted);
+        if(obj.type === 'Jumping-rope') return new JumpingRope(obj.duration, obj.day, obj.id, obj.date, obj.isFinished, obj.isNotCompleted);
 
 
-        return new CustomActivity(obj.duration, obj.type, obj.id, obj.date, obj.isFinished, obj.isNotCompleted);
+        return new CustomActivity(obj.duration, obj.type, obj.day, obj.id, obj.date, obj.isFinished, obj.isNotCompleted);
     })
 
     return arrayOfObj;

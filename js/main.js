@@ -8,7 +8,7 @@ const dialog = document.getElementById("workoutModal");
 const closeDialogBtn = document.getElementById("closeModalBtn");
 const dropdown = document.getElementById("type");
 const duration = document.getElementById("duration");
-const distance = document.getElementById("distance");
+const day = document.getElementById("day");
 const workoutForm = document.getElementById("workoutForm");
 const emptyState = document.getElementById("emptyState");
 const dashboard = document.getElementById("dashboard");
@@ -34,14 +34,6 @@ closeDialogBtn.addEventListener("click", () => {
 
 dropdown.addEventListener("change", (e) => {
   const value = e.target.value;
-  if (value === "Gym") {
-    distance.value = 0;
-    distance.disabled = true;
-  } else {
-    distance.value = "";
-    distance.disabled = false;
-  }
-
     const hiddenActivity = document.querySelector('.hidden-Activity');
     hiddenActivity.classList.toggle('show', value === 'Others')
 });
@@ -54,30 +46,30 @@ workoutForm.addEventListener("submit", (e) => {
 
   const type = dropdown.value === 'Others'? customActivityType.value : dropdown.value;
   const dur = Number(duration.value);
-  const dist = Number(distance.value);
+  const dayValue = day.value;
 
-  console.log("type: ", type, " dur: ", dur, " dist ", dist);
+  console.log("type: ", type, " dur: ", dur, "day: ", dayValue);
 
   let activity;
 
   switch (dropdown.value) {
     case "Running":
-      activity = new Running(dist, dur);
+      activity = new Running(dur, dayValue);
       break;
     case "Cycling":
-      activity = new Cycling(dist, dur);
+      activity = new Cycling(dur, dayValue);
       break;
     case "Gym":
-      activity = new Gym(dur);
+      activity = new Gym(dur, dayValue);
       break;
     case "Swimming":
-      activity = new Swimming(dur);
+      activity = new Swimming(dur, dayValue);
       break;
     case "Jumping-rope":
-      activity = new JumpingRope(dur);
+      activity = new JumpingRope(dur, dayValue);
       break;
     case "Others":
-      activity = new CustomActivity(dur, type);
+      activity = new CustomActivity(dur, dayValue, type);
     break;
   }
 
@@ -86,8 +78,8 @@ workoutForm.addEventListener("submit", (e) => {
   console.log("dataArray   ----- ", arr);
 
   renderDashboard(arr);
-  distance.value = "";
   duration.value = "";
+  customActivityType.value = "";
   dialog.close();
 });
 
@@ -142,10 +134,17 @@ function workoutArray(activity) {
 // 2.
 function renderDashboard(workArray) {
 
-  if (workArray.length === 0) {
-    dashboard.innerHTML = `<div id="emptyState"><p>No workouts logged yet. Time to move! 💪</p></div>`;
-    return; // Stop the function here
-}
+
+
+if (workArray.length === 0) {
+    // Keep the image in the template string so it doesn't disappear
+    dashboard.innerHTML = `
+      <div id="emptyState">
+        <p>No workouts logged yet. Time to move! 💪</p>
+        <img src="images/workout.png" alt="workout" class="empty-state-img">
+      </div>`;
+    return;
+  }
 
   dashboard.innerHTML = "";
 
@@ -167,7 +166,11 @@ function renderDashboard(workArray) {
 
       return `
         <li class='workout-List ${finishedToggle}' data-id = '${obj.id}'>
-        ${obj.getSummary()} <span class = 'remove'>❌</span>
+        <span class="workout-day">${obj.day}</span>
+        <div class="workout-content">
+            ${obj.getSummary()}
+        </div>
+        <span class = 'remove'>❌</span>
         <button class='finished-btn' ${finishedDisable}>Mark As Finished</button>
         <button class='notCompleted-btn ${notCompletedToggle}' ${notCompletedDisable}>Not Completed</button>
         </li>
