@@ -22,7 +22,7 @@ export function rehydration(workArray) {
         if(obj.type === 'Jumping-rope') return new JumpingRope(obj.duration, obj.day, obj.id, obj.date, obj.isFinished, obj.isNotCompleted);
 
 
-        return new CustomActivity(obj.duration, obj.type, obj.day, obj.id, obj.date, obj.isFinished, obj.isNotCompleted);
+        return new CustomActivity(obj.duration, obj.day, obj.type, obj.id, obj.date, obj.isFinished, obj.isNotCompleted);
     })
 
     return arrayOfObj;
