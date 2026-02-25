@@ -55,27 +55,6 @@ h1 span {
     gap: 0.5rem;
 }
 
-#filterBtn{
-    background: var(--accent);
-    color: #000;
-    border: none;
-    padding: 0.8rem 1.5rem;
-    border-radius: 12px;
-    font-weight: 700;
-    transition: transform 0.2s, box-shadow 0.2s;
-    position: relative;
-}
-
-.showfilter {
-    position: absolute;
-    padding: 5px;
-    border: 1px solid var(--accent);
-    color: #000;
-    background-color: #b1c7449a;
-
-
-}
-
 .btn-primary {
     background: var(--accent);
     color: #000;
@@ -166,7 +145,7 @@ li {
 }
 
 .workout-content {
-    margin-top: 0.5rem;
+    margin-top: 1rem;
     font-weight: 500;
     line-height: 1.4;
 }
@@ -340,5 +319,20 @@ button:disabled {
 
     h1 {
         font-size: 1.5rem;
+    }
+
+    .filter-container {
+        flex-direction: column; /* Stacks the "Day" and "Status" groups */
+        align-items: stretch;   /* Makes them full width */
+        gap: 1rem;
+        padding: 1.5rem 1rem;
+    }
+
+    .filter-group {
+        justify-content: space-between; /* Put label on left, select on right */
+    }
+
+    .custom-select {
+        width: 60%; /* Gives the dropdown enough room for text */
     }
 }

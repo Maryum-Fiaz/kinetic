@@ -1,4 +1,12 @@
-import { Activity, Running, Cycling, Gym, Swimming, JumpingRope, CustomActivity } from "./activity.js";
+import {
+  Activity,
+  Running,
+  Cycling,
+  Gym,
+  Swimming,
+  JumpingRope,
+  CustomActivity,
+} from "./activity.js";
 import { saveInStorage, getFromStorage } from "./storage/storage.js";
 import { rehydration } from "./utils.js";
 
@@ -13,60 +21,46 @@ const workoutForm = document.getElementById("workoutForm");
 const dashboard = document.getElementById("dashboard");
 const filterContainer = document.querySelector(".filter-container");
 const filterDay = document.getElementById("filter-day");
-
+const filterStatus = document.getElementById("filter-status");
 
 // **************** VARIABLES ***************
 const ulList = document.createElement("ul");
 let arr = getFromStorage("workoutList");
-arr = rehydration(arr)
+arr = rehydration(arr);
 console.log("get data from storage arr: ", arr);
-
 
 // **************** ON FIRST LOAD **************
 renderDashboard(arr);
 
-
 // **************** EVENT LISTENERS ****************
+// 1, 2.
+filterDay.addEventListener("change", applyFilters);
+filterStatus.addEventListener("change", applyFilters);
 
-filterDay.addEventListener('change', (e) => {
-  let arrayOfWorkouts = arr;
-  const selectedDayValue = e.target.value;
-  console.log(selectedDayValue);
-  if(selectedDayValue === 'All'){
-    renderDashboard(arrayOfWorkouts);
-  }
-  else{
-    arrayOfWorkouts = arr.filter(obj => obj.day === selectedDayValue)
-    renderDashboard(arrayOfWorkouts)
-  }
-  console.log('arr now: ', arr);
-  console.log('and arrayOfWorkouts: ', arrayOfWorkouts);
-  
-})
-
-
-
+// 3.
 addWorkout.addEventListener("click", () => {
   dialog.showModal();
 });
 
+// 4.
 closeDialogBtn.addEventListener("click", () => {
   dialog.close();
 });
 
+// 5.
 dropdown.addEventListener("change", (e) => {
   const value = e.target.value;
-    const hiddenActivity = document.querySelector('.hidden-Activity');
-    hiddenActivity.classList.toggle('show', value === 'Others')
+  const hiddenActivity = document.querySelector(".hidden-Activity");
+  hiddenActivity.classList.toggle("show", value === "Others");
 });
 
-
-const customActivityType = document.getElementById('activity-type');
-// 1.
+const customActivityType = document.getElementById("activity-type");
+// 6.
 workoutForm.addEventListener("submit", (e) => {
   e.preventDefault();
 
-  const type = dropdown.value === 'Others'? customActivityType.value : dropdown.value;
+  const type =
+    dropdown.value === "Others" ? customActivityType.value : dropdown.value;
   const dur = Number(duration.value);
   const dayValue = day.value;
 
@@ -92,7 +86,7 @@ workoutForm.addEventListener("submit", (e) => {
       break;
     case "Others":
       activity = new CustomActivity(dur, dayValue, type);
-    break;
+      break;
   }
 
   workoutArray(activity); // data entered --> array
@@ -105,7 +99,7 @@ workoutForm.addEventListener("submit", (e) => {
   dialog.close();
 });
 
-// 2.
+// 7.
 ulList.addEventListener("click", (e) => {
   const listToBeDel = e.target.closest("li");
   const targetId = listToBeDel.dataset.id;
@@ -122,7 +116,6 @@ ulList.addEventListener("click", (e) => {
 
   // mark as finished
   if (e.target.classList.contains("finished-btn")) {
-
     arr.forEach((obj) => {
       if (obj.id === targetId) {
         obj.isFinished = !obj.isFinished;
@@ -154,10 +147,30 @@ function workoutArray(activity) {
 } // converting data into array
 
 // 2.
-function renderDashboard(workArray) {
+function applyFilters() {
+  let filtered = arr;
+  let currentStatusVal = filterStatus.value;
 
-if (workArray.length === 0) {
-  filterContainer.style.visibility = 'hidden';
+  if (filterDay.value !== "All") {
+    filtered = arr.filter((obj) => obj.day === filterDay.value);
+  }
+
+  if (currentStatusVal === "isFinished") {
+    filtered = filtered.filter((obj) => obj.isFinished === true);
+  } else if (currentStatusVal === "isNotCompleted") {
+    filtered = filtered.filter((obj) => obj.isNotCompleted === true);
+  } else if (currentStatusVal === "inProgress") {
+    filtered = filtered.filter(
+      (obj) => obj.isFinished === false && obj.isNotCompleted === false,
+    );
+  }
+
+  renderDashboard(filtered);
+}
+
+// 3.
+function renderDashboard(workArray) {
+  if (workArray.length === 0) {
     dashboard.innerHTML = `
       <div id="emptyState">
         <p>No workouts logged yet. Time to move! 💪</p>
@@ -167,7 +180,8 @@ if (workArray.length === 0) {
   }
 
   dashboard.innerHTML = "";
-  filterContainer.style.visibility = 'visible';
+  filterContainer.style.visibility = "visible";
+
   ulList.setAttribute("id", "ulList");
 
   const listItems = workArray
@@ -175,13 +189,13 @@ if (workArray.length === 0) {
       let finishedToggle = obj.isFinished ? "toggle" : "";
       let notCompletedToggle = obj.isNotCompleted ? "is-failed" : "";
 
-      let notCompletedDisable = '';
-      let finishedDisable = '';
+      let notCompletedDisable = "";
+      let finishedDisable = "";
 
-      if(finishedToggle){
-        notCompletedDisable = 'disabled';
+      if (finishedToggle) {
+        notCompletedDisable = "disabled";
       } else if (notCompletedToggle) {
-        finishedDisable = 'disabled';
+        finishedDisable = "disabled";
       }
 
       return `
