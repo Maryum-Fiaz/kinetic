@@ -9,8 +9,35 @@
 <body>
     <header>
         <h1>MOVE <span>.</span></h1>
-        <button id="openModalBtn" class="btn-primary">+ Add Workout</button>
+        <div class="btn-container">
+            <button id="openModalBtn" class="btn-primary">+ Add Workout</button>
+        </div>
     </header>
+
+    <section class="filter-container">
+    <div class="filter-group">
+        <label for="filter-day">Day:</label>
+        <select id="filter-day" class="custom-select">
+            <option value="All">All Days</option>
+            <option value="Monday">Monday</option>
+            <option value="Tuesday">Tuesday</option>
+            <option value="Wednesday">Wednesday</option>
+            <option value="Thursday">Thursday</option>
+            <option value="Friday">Friday</option>
+            <option value="Saturday">Saturday</option>
+            <option value="Sunday">Sunday</option>
+        </select>
+    </div>
+
+    <div class="filter-group">
+        <label for="filter-status">Status:</label>
+        <select id="filter-status" class="custom-select">
+            <option value="All">All Status</option>
+            <option value="Finished">Completed ✅</option>
+            <option value="Not Completed">In Progress ⏳</option>
+        </select>
+    </div>
+</section>
 
     <main id="dashboard">
         <div id="emptyState">

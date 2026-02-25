@@ -10,19 +10,41 @@ const dropdown = document.getElementById("type");
 const duration = document.getElementById("duration");
 const day = document.getElementById("day");
 const workoutForm = document.getElementById("workoutForm");
-const emptyState = document.getElementById("emptyState");
 const dashboard = document.getElementById("dashboard");
+const filterContainer = document.querySelector(".filter-container");
+const filterDay = document.getElementById("filter-day");
+
 
 // **************** VARIABLES ***************
 const ulList = document.createElement("ul");
 let arr = getFromStorage("workoutList");
 arr = rehydration(arr)
-console.log("get data from storage: ", arr);
+console.log("get data from storage arr: ", arr);
+
 
 // **************** ON FIRST LOAD **************
 renderDashboard(arr);
 
+
 // **************** EVENT LISTENERS ****************
+
+filterDay.addEventListener('change', (e) => {
+  let arrayOfWorkouts = arr;
+  const selectedDayValue = e.target.value;
+  console.log(selectedDayValue);
+  if(selectedDayValue === 'All'){
+    renderDashboard(arrayOfWorkouts);
+  }
+  else{
+    arrayOfWorkouts = arr.filter(obj => obj.day === selectedDayValue)
+    renderDashboard(arrayOfWorkouts)
+  }
+  console.log('arr now: ', arr);
+  console.log('and arrayOfWorkouts: ', arrayOfWorkouts);
+  
+})
+
+
 
 addWorkout.addEventListener("click", () => {
   dialog.showModal();
@@ -134,10 +156,8 @@ function workoutArray(activity) {
 // 2.
 function renderDashboard(workArray) {
 
-
-
 if (workArray.length === 0) {
-    // Keep the image in the template string so it doesn't disappear
+  filterContainer.style.visibility = 'hidden';
     dashboard.innerHTML = `
       <div id="emptyState">
         <p>No workouts logged yet. Time to move! 💪</p>
@@ -147,7 +167,7 @@ if (workArray.length === 0) {
   }
 
   dashboard.innerHTML = "";
-
+  filterContainer.style.visibility = 'visible';
   ulList.setAttribute("id", "ulList");
 
   const listItems = workArray
