@@ -22,6 +22,7 @@ const dashboard = document.getElementById("dashboard");
 const filterContainer = document.querySelector(".filter-container");
 const filterDay = document.getElementById("filter-day");
 const filterStatus = document.getElementById("filter-status");
+const clearBtn = document.getElementById("clearBtn");
 
 // **************** VARIABLES ***************
 const ulList = document.createElement("ul");
@@ -103,14 +104,11 @@ workoutForm.addEventListener("submit", (e) => {
 ulList.addEventListener("click", (e) => {
   const listToBeDel = e.target.closest("li");
   const targetId = listToBeDel.dataset.id;
-  console.log("tttargettt id: ", targetId, " listto be del: ", listToBeDel);
 
   // delete
   if (e.target.classList.contains("remove")) {
     arr = arr.filter((obj) => obj.id !== targetId);
     saveInStorage("workoutList", arr);
-
-    console.log("new arr:  ", arr);
     renderDashboard(arr);
   }
 
@@ -138,7 +136,15 @@ ulList.addEventListener("click", (e) => {
   }
 });
 
+// 8.
+clearBtn.addEventListener('click', () => {
+  renderDashboard(arr)
+  filterDay.value = 'All';
+  filterStatus.value = 'All';
+})
+
 // ************ FUNCTION *************
+
 
 // 1.
 function workoutArray(activity) {
