@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MOVE | Fitness Tracker</title>
     <link rel="stylesheet" href="index.css">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 </head>
 <body>
     <header>
@@ -91,6 +93,21 @@
         </form>
     </dialog>
 
+    <button id="aiCoachBtn" title="Ask Ai">
+        <span class="material-symbols-outlined" style="font-size: 30px; vertical-align: middle;">
+network_intelligence
+</span>
+    </button>
+
+    <div id="aiOverlay" class="hidden">
+    <div class="ai-card">
+        <button id="closeCoach">✕</button>
+        <h3>Coach Advice</h3>
+        <p id="aiResponse">Thinking...</p>
+    </div>
+</div>
+
     <script type="module" src="js/main.js"></script>
+    <script type="module" src="js/coach.js"></script>
 </body>
 </html>
