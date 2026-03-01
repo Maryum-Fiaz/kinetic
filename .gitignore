@@ -1,0 +1,9 @@
+# Ignore the secret keys
+backend/.env
+
+# Ignore the heavy library folders
+backend/node_modules/
+frontend/node_modules/ 
+
+# Ignore system files
+.DS_Store

@@ -29,6 +29,8 @@ const ulList = document.createElement("ul");
 let arr = getFromStorage("workoutList");
 arr = rehydration(arr);
 console.log("get data from storage arr: ", arr);
+// export let finish = false;
+// export let notComplete = false;
 
 // **************** ON FIRST LOAD **************
 renderDashboard(arr);
@@ -61,7 +63,7 @@ workoutForm.addEventListener("submit", (e) => {
   e.preventDefault();
 
   const type =
-    dropdown.value === "Others" ? customActivityType.value : dropdown.value;
+    dropdown.value === "Others" ? customActivityType.value.trim() : dropdown.value;
   const dur = Number(duration.value);
   const dayValue = day.value;
 
@@ -117,6 +119,7 @@ ulList.addEventListener("click", (e) => {
     arr.forEach((obj) => {
       if (obj.id === targetId) {
         obj.isFinished = !obj.isFinished;
+        // finish = !finish;
       }
     });
     renderDashboard(arr);
@@ -129,6 +132,7 @@ ulList.addEventListener("click", (e) => {
     arr.forEach((obj) => {
       if (obj.id === targetId) {
         obj.isNotCompleted = !obj.isNotCompleted;
+        // notComplete = !notComplete;
       }
     });
     renderDashboard(arr);
