@@ -28,9 +28,6 @@ const clearBtn = document.getElementById("clearBtn");
 const ulList = document.createElement("ul");
 let arr = getFromStorage("workoutList");
 arr = rehydration(arr);
-console.log("get data from storage arr: ", arr);
-// export let finish = false;
-// export let notComplete = false;
 
 // **************** ON FIRST LOAD **************
 renderDashboard(arr);
@@ -67,7 +64,6 @@ workoutForm.addEventListener("submit", (e) => {
   const dur = Number(duration.value);
   const dayValue = day.value;
 
-  console.log("type: ", type, " dur: ", dur, "day: ", dayValue);
 
   let activity;
 
@@ -94,7 +90,6 @@ workoutForm.addEventListener("submit", (e) => {
 
   workoutArray(activity); // data entered --> array
   saveInStorage("workoutList", arr);
-  console.log("dataArray   ----- ", arr);
 
   renderDashboard(arr);
   duration.value = "";
@@ -119,7 +114,6 @@ ulList.addEventListener("click", (e) => {
     arr.forEach((obj) => {
       if (obj.id === targetId) {
         obj.isFinished = !obj.isFinished;
-        // finish = !finish;
       }
     });
     renderDashboard(arr);
@@ -128,11 +122,9 @@ ulList.addEventListener("click", (e) => {
 
   // not completed
   if (e.target.classList.contains("notCompleted-btn")) {
-    console.log(" not completed btn");
     arr.forEach((obj) => {
       if (obj.id === targetId) {
         obj.isNotCompleted = !obj.isNotCompleted;
-        // notComplete = !notComplete;
       }
     });
     renderDashboard(arr);
@@ -156,7 +148,7 @@ function workoutArray(activity) {
   return arr;
 } // converting data into array
 
-// 2.
+// 2.  applying filters
 function applyFilters() {
   let filtered = arr;
   let currentStatusVal = filterStatus.value;
@@ -178,7 +170,7 @@ function applyFilters() {
   renderDashboard(filtered);
 }
 
-// 3.
+// 3.  rendering data
 function renderDashboard(workArray) {
   if (workArray.length === 0) {
     dashboard.innerHTML = `

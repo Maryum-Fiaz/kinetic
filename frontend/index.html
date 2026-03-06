@@ -1,113 +1,126 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MOVE | Fitness Tracker</title>
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="index.css" />
 
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
-</head>
-<body>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+    />
+  </head>
+  <body>
     <header>
-        <h1>MOVE <span>.</span></h1>
-        <div class="btn-container">
-            <button id="openModalBtn" class="btn-primary">+ Add Workout</button>
-        </div>
+      <h1>MOVE <span>.</span></h1>
+      <div class="btn-container">
+        <button id="openModalBtn" class="btn-primary">+ Add Workout</button>
+      </div>
     </header>
 
     <section class="filter-container">
-    <div class="filter-group">
+      <div class="filter-group">
         <label for="filter-day">Day:</label>
         <select id="filter-day" class="custom-select">
-            <option value="All">All Days</option>
-            <option value="Monday">Monday</option>
-            <option value="Tuesday">Tuesday</option>
-            <option value="Wednesday">Wednesday</option>
-            <option value="Thursday">Thursday</option>
-            <option value="Friday">Friday</option>
-            <option value="Saturday">Saturday</option>
-            <option value="Sunday">Sunday</option>
+          <option value="All">All Days</option>
+          <option value="Monday">Monday</option>
+          <option value="Tuesday">Tuesday</option>
+          <option value="Wednesday">Wednesday</option>
+          <option value="Thursday">Thursday</option>
+          <option value="Friday">Friday</option>
+          <option value="Saturday">Saturday</option>
+          <option value="Sunday">Sunday</option>
         </select>
-    </div>
+      </div>
 
-    <div class="filter-group">
+      <div class="filter-group">
         <label for="filter-status">Status:</label>
         <select id="filter-status" class="custom-select">
-            <option value="All">All Status</option>
-            <option value="isFinished">Completed</option>
-            <option value="isNotCompleted">Not Completed</option>
-            <option value="inProgress">In Progress</option>
+          <option value="All">All Status</option>
+          <option value="isFinished">Completed</option>
+          <option value="isNotCompleted">Not Completed</option>
+          <option value="inProgress">In Progress</option>
         </select>
-    </div>
+      </div>
 
-    <div class="filter-group">
-        <button type="reset" id="clearBtn" class="btn-clear">Clear Filter</button>
-    </div>
-</section>
+      <div class="filter-group">
+        <button type="reset" id="clearBtn" class="btn-clear">
+          Clear Filter
+        </button>
+      </div>
+    </section>
 
     <main id="dashboard">
-        <div id="emptyState">
-            <p>No workouts logged yet. Time to move! 💪</p>
-            <img src="images/workout.png" alt="workout">
-        </div>
+      <div id="emptyState">
+        <p>
+          No workouts logged yet. Time to move!
+          <span class="material-symbols-outlined"> fitness_center </span>
+        </p>
+        <img src="images/workout.png" alt="workout" />
+      </div>
     </main>
 
     <dialog id="workoutModal">
-        <form id="workoutForm" method="dialog">
-            <h2>New Activity</h2>
-            
-            <label for="type">Activity Type</label>
-            <select id="type" required>
-                <option value="Running">Running 👟</option>
-                <option value="Cycling">Cycling 🚲</option>
-                <option value="Gym">Gym 💪</option>
-                <option value="Swimming">Swimming 🥽</option>
-                <option value="Jumping-rope">Jumping rope</option>
-                <option value="Others">Others</option>
-            </select>
+      <form id="workoutForm" method="dialog">
+        <h2>New Activity</h2>
 
-            <div class="hidden-Activity">
-                <label for="activity-type">Enter Activity </label>
-                <input type="text" id="activity-type" placeholder="others...">
-            </div>
+        <label for="type">Activity Type</label>
+        <select id="type" required>
+          <option value="Running">Running</option>
+          <option value="Cycling">Cycling</option>
+          <option value="Gym">Gym</option>
+          <option value="Swimming">Swimming</option>
+          <option value="Jumping-rope">Jumping rope</option>
+          <option value="Others">Others</option>
+        </select>
 
-            <label for="day">Day</label>
-            <select id="day" required>
-                <option value="Monday">Monday</option>
-                <option value="Tuesday">Tuesday</option>
-                <option value="Wednesday">Wednesday</option>
-                <option value="Thursday">Thursday</option>
-                <option value="Friday">Friday</option>
-                <option value="Saturday">Saturday</option>
-                <option value="Sunday">Sunday</option>
-            </select>
+        <div class="hidden-Activity">
+          <label for="activity-type">Enter Activity </label>
+          <input type="text" id="activity-type" placeholder="others..." />
+        </div>
 
-            <label for="duration">Duration (mins)</label>
-            <input type="number" id="duration" placeholder="30" required>
+        <label for="day">Day</label>
+        <select id="day" required>
+          <option value="Monday">Monday</option>
+          <option value="Tuesday">Tuesday</option>
+          <option value="Wednesday">Wednesday</option>
+          <option value="Thursday">Thursday</option>
+          <option value="Friday">Friday</option>
+          <option value="Saturday">Saturday</option>
+          <option value="Sunday">Sunday</option>
+        </select>
 
-            <div class="modal-actions">
-                <button type="button" id="closeModalBtn" class="btn-secondary">Cancel</button>
-                <button type="submit" class="btn-primary">Save Activity</button>
-            </div>
-        </form>
+        <label for="duration">Duration (mins)</label>
+        <input type="number" id="duration" placeholder="30" required />
+
+        <div class="modal-actions">
+          <button type="button" id="closeModalBtn" class="btn-secondary">
+            Cancel
+          </button>
+          <button type="submit" class="btn-primary">Save Activity</button>
+        </div>
+      </form>
     </dialog>
 
     <button id="aiCoachBtn" title="Ask Ai">
-        <span class="material-symbols-outlined" style="font-size: 30px; vertical-align: middle;">
-network_intelligence
-</span>
+      <span
+        class="material-symbols-outlined"
+        style="font-size: 30px; vertical-align: middle"
+      >
+        network_intelligence
+      </span>
     </button>
 
     <div id="aiOverlay" class="hidden">
-    <div class="ai-card">
+      <div class="ai-card">
         <button id="closeCoach">✕</button>
         <h3>Coach Advice</h3>
         <p id="aiResponse"></p>
+      </div>
     </div>
-</div>
 
     <script type="module" src="js/main.js"></script>
     <script type="module" src="js/coach.js"></script>
-</body>
+  </body>
 </html>
